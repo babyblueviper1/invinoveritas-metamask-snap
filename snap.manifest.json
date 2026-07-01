@@ -1,0 +1,30 @@
+{
+  "version": "0.1.1",
+  "description": "An independent, recomputable verdict before you sign — deterministic scam/drainer/approval/address-poisoning checks via invinoveritas /review, plus a Bitcoin-anchored proof anyone can re-verify offline. Advisory: it informs you, never blocks signing.",
+  "proposedName": "invinoveritas — verify before you sign",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/babyblueviper1/invinoveritas-metamask-snap.git"
+  },
+  "source": {
+    "shasum": "/1zZC/FR0aJmmi3dTvL99GJJ4EJWvuQkIEMsIwuPOwM=",
+    "location": {
+      "npm": {
+        "filePath": "dist/bundle.js",
+        "iconPath": "images/icon.svg",
+        "packageName": "invinoveritas-metamask-snap",
+        "registry": "https://registry.npmjs.org/"
+      }
+    }
+  },
+  "initialPermissions": {
+    "endowment:transaction-insight": {},
+    "endowment:network-access": {},
+    "endowment:rpc": {
+      "dapps": true
+    },
+    "snap_manageState": {}
+  },
+  "platformVersion": "6.24.0",
+  "manifestVersion": "0.1"
+}

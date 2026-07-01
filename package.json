@@ -1,0 +1,45 @@
+{
+  "name": "invinoveritas-metamask-snap",
+  "version": "0.1.1",
+  "description": "MetaMask Snap: an independent, recomputable verdict on every transaction before you sign it. Thin adapter over invinoveritas-governance-gate-core.",
+  "keywords": [
+    "metamask",
+    "snap",
+    "transaction-insight",
+    "wallet-security",
+    "onchain",
+    "verification",
+    "pre-sign",
+    "recomputable-proof",
+    "drainer-protection"
+  ],
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist",
+    "images",
+    "snap.manifest.json"
+  ],
+  "scripts": {
+    "build": "mm-snap build",
+    "serve": "mm-snap serve",
+    "watch": "mm-snap watch",
+    "lint:manifest": "mm-snap manifest"
+  },
+  "dependencies": {
+    "invinoveritas-governance-gate-core": "^0.1.0",
+    "@metamask/snaps-sdk": "^6.24.0",
+    "prettier": "^3.9.0"
+  },
+  "devDependencies": {
+    "@metamask/snaps-cli": "^6.0.0",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=18.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/babyblueviper1/invinoveritas-metamask-snap.git"
+  }
+}
