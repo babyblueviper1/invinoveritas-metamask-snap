@@ -11,6 +11,46 @@ the verdict **plus a Bitcoin-anchored proof anyone can re-verify offline** at `/
 
 **Advisory:** it informs you; the decision to sign stays yours. It never blocks signing.
 
+---
+
+## For users — knowledge base
+
+**What this Snap does, in one line:** before you sign any transaction, it shows an independent verdict (approve / approve-with-concerns / reject) on whether the transaction looks safe — checking for scam/honeypot tokens, wallet-drainer approvals, address poisoning, wrong-chain recipients, and bad slippage — and attaches a proof you can re-verify yourself. It is **advisory**: it never blocks or changes your transaction, it only informs you.
+
+### Install it
+1. Install **MetaMask Flask** (or MetaMask once this Snap is allowlisted).
+2. Install the Snap by its ID `npm:invinoveritas-metamask-snap` — via the [Snaps directory](https://snaps.metamask.io) once listed, or the [Snap install tester](https://montoya.github.io/snap-install-tester/) for Flask.
+3. Approve the permissions (transaction insights, network access) — see the permissions table below for why each is requested.
+
+### First-time setup: your review key (one time, free)
+The Snap calls the invinoveritas `/review` service, which needs a free API key. The key is stored **encrypted inside your MetaMask and never leaves it**.
+1. Get a free key: `POST https://api.babyblueviper.com/register` with body `{"label":"metamask"}` (instant, no payment).
+2. Set it in the Snap via `setApiKey` (see the developer snippet below), or through the companion dApp at https://api.babyblueviper.com.
+3. To remove it later, use `clearApiKey`.
+
+Without a key, the Snap still loads and the insight panel explains how to get one — it fails **open** (never blocks your transaction).
+
+### Using it day to day
+Just transact normally. On every transaction, an insight panel appears showing:
+- **Verdict** — ✅ approve / ⚠️ approve-with-concerns / ⛔ reject, with a confidence score.
+- **Up to 5 ranked issues**, each a deterministic finding with a `recompute:` pointer.
+- **A recomputable proof** — the verdict is a BIP-340-signed, Bitcoin-anchored event; the panel links the `/verify-proof` URL so you (or anyone you forward it to) can confirm it offline without trusting us.
+
+### Troubleshooting
+- **"Verdict unavailable" / the panel shows a setup message** — no API key is set yet, or the review service was unreachable. Set your key (above) or retry; the Snap fails open, so your transaction is never blocked.
+- **No panel appears** — confirm the Snap is enabled in *Settings → Snaps* and that it has the transaction-insight permission.
+- **A verdict looks wrong** — it's advisory and deterministic; every finding carries a `recompute:` pointer so you can check the reasoning. Report disagreements via the support channel below.
+
+### Privacy & safety
+- Your API key is stored in encrypted Snap state and never leaves MetaMask.
+- The Snap reads the transaction only to review it; it holds no keys, cannot sign, move funds, or access your accounts. It requests none of the key-management permissions.
+- Transaction details are sent to the `/review` endpoint to produce the verdict; see https://api.babyblueviper.com for the data policy.
+
+### Support
+- Issues / questions: https://github.com/babyblueviper1/invinoveritas-metamask-snap/issues
+- Email: fsllanos@gmail.com
+- Service status & docs: https://api.babyblueviper.com
+
 ## Architecture
 
 This is a thin **adapter** over [`invinoveritas-governance-gate-core`](../governance-gate-core). The
