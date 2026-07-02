@@ -121,6 +121,38 @@ On every transaction, an insight panel:
 point users at the `npm:invinoveritas-metamask-snap` snap id. (The on-chain Safe-guard / ERC-4337
 variant — verifying a signed verdict *on-chain* via our BIP340Verifier — is a separate artifact.)
 
+## FAQ
+
+**Is this Snap safe to install? Can it steal my funds?**
+No. It requests none of the key-management permissions (`snap_getBip32Entropy`, `snap_getBip44Entropy`, `snap_getEntropy`, `snap_manageAccounts`), so it **cannot access your keys, sign transactions, or move funds**. It can only read a pending transaction to review it and show you an insight panel. Source is public and it passed a Snapper security scan with zero findings.
+
+**Will it block or change my transactions?**
+Never. It is strictly **advisory** — it shows a verdict and lets you decide. If the review service is unreachable or you haven't set a key, it fails **open**: your transaction proceeds normally.
+
+**Do you see my private keys or seed phrase?**
+No. The Snap has no permission to read them, and MetaMask does not expose them to Snaps that don't request key-management endowments (this one doesn't).
+
+**Why does it need an API key, and where is it stored?**
+The key authenticates calls to the invinoveritas `/review` service. It's stored in **encrypted Snap state inside your MetaMask and never leaves it**. Get one free at `POST https://api.babyblueviper.com/register`; remove it anytime with `clearApiKey`.
+
+**What data is sent off-device?**
+Only the prepared transaction details needed to produce the verdict are sent to the `/review` endpoint over HTTPS. No keys, no account balances, no browsing data. See the data policy at https://api.babyblueviper.com.
+
+**What does it cost?**
+Registration is free. Each `/review` call is a small pay-per-use amount (Lightning sats, USDC via x402 on Base, or card), or covered by a governance plan. `verify_proof` — checking any verdict proof — is always free.
+
+**Which chains does it work on?**
+Any EVM transaction MetaMask surfaces through the transaction-insight endowment. The checks (scam/honeypot tokens, unlimited-approval drainers, address poisoning, wrong-chain recipients, slippage) are chain-agnostic.
+
+**What is the "recomputable proof" in the panel?**
+Every verdict is a BIP-340-signed, Bitcoin-anchored event. The panel links a `/verify-proof` URL so you — or anyone you forward the proof to — can confirm the verdict offline against our published key, without trusting us. Trust the math, not the vendor.
+
+**A verdict looks wrong — what do I do?**
+Verdicts are deterministic and each finding carries a `recompute:` pointer so you can check the reasoning. It's advisory, so you can sign anyway. Please report disagreements at the support links below so we can improve the checks.
+
+**How do I uninstall it?**
+Remove it from *Settings → Snaps* in MetaMask. That deletes its encrypted state, including your stored API key.
+
 ## License
 
 MIT
