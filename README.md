@@ -5,7 +5,7 @@ An **independent, recomputable verdict on every transaction before you sign it**
 MetaMask's built-in checks tell you *what* a transaction does. They don't tell you whether a party
 that **isn't your agent** judged it safe — and they leave no portable, recomputable record. This Snap
 intercepts every outgoing transaction (`onTransaction` / the transaction-insight endowment), sends the
-prepared tx to invinoveritas [`/review`](https://api.babyblueviper.com) (`artifactType="onchain_action"`
+prepared tx to invinoveritas [`/review`](https://invinoveritas.dev) (`artifactType="onchain_action"`
 — deterministic scam / drainer / unlimited-approval / address-poisoning / slippage checks), and renders
 the verdict **plus a Bitcoin-anchored proof anyone can re-verify offline** at `/verify-proof`.
 
